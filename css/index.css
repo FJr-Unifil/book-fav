@@ -1,0 +1,85 @@
+:root {
+  font-size: 62.5%;
+  --purple-color: #6c63ff;
+  --pink-color: #c570ff;
+  --blue-color: #57a7ff;
+  --yellow-color: #ffd07d;
+  --gradient-bg: linear-gradient(
+    var(--pink-color),
+    var(--blue-color)
+  );
+  --really-big-font-size: 4.8rem;
+  --big-font-size: 2.4rem;
+  --normal-font-size: 1.6rem;
+}
+
+:root.light {
+  --text-color: #3d3d3d;
+  --background-color: #d8d5d9;
+  --input-bg-color: #bebebe80;
+}
+
+:root.dark {
+  --text-color: #d8d5d9;
+  --background-color: #3d3d3d;
+  --input-bg-color: #25252580;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  font-size: var(--normal-font-size);
+  font-family: 'Poppins', sans-serif;
+
+  padding-top: 4rem;
+}
+
+.container {
+  max-width: 1186px;
+  margin: 0 auto;
+
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+i {
+  height: var(--normal-font-size);
+  width: var(--normal-font-size);
+
+  color: var(--text-color);
+}
+
+a:hover,
+.input-wrapper:hover,
+button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+a,
+button,
+.input-wrapper {
+  transition: 0.5s;
+}
+
+@media (max-width: 970px) {
+  :root {
+    --really-big-font-size: 3.2rem;
+    --big-font-size: 2.4rem;
+  }
+}
