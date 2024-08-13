@@ -43,7 +43,7 @@ const renderBooks = (books) => {
   main.appendChild(h1);
   main.appendChild(searchResult);
 
-  books.forEach((book) => {
+  books.forEach((book, index) => {
     const bookCard = document.createElement('div');
     bookCard.className = 'book-card';
 
@@ -68,16 +68,48 @@ const renderBooks = (books) => {
           ', '
         )}</p>
       </div>
-      <button class="add-book">adicionar à biblioteca</button>
+      <button class="add-book" data-index=${index} >adicionar à biblioteca</button>
     `;
 
     searchResult.appendChild(bookCard);
+
+    searchResult.addEventListener('click', handleAddBook);
   });
+};
+
+const handleAddBook = (event) => {
+  if (!event.target.classList.contains('add-book')) return;
+
+  const bookIndex = parseInt(event.target.getAttribute('data-index'));
+  const bookToSave = window.searchResults[bookIndex];
+
+  if (saveBookToLocalStorage(bookToSave)) {
+    event.target.disabled = true;
+    event.target.textContent = 'Adicionado';
+    console.log(`Livro adicionado: ${JSON.stringify(bookToSave)}`);
+  }
 };
 
 const searchBooks = async (query) => {
   const books = await fetchBooks(query);
+  window.searchResults = books;
   renderBooks(books);
+};
+
+const saveBookToLocalStorage = (book) => {
+  let library = JSON.parse(localStorage.getItem('library')) || [];
+
+  const isBookInLibrary = library.some(
+    (libraryBook) => libraryBook.title === book.title
+  );
+
+  if (!isBookInLibrary) {
+    library.push(book);
+    localStorage.setItem('library', JSON.stringify(library));
+    console.log('Book added to library');
+  } else {
+    console.log('Book already in library');
+  }
 };
 
 const searchBtn = document.querySelector('#search-book');
