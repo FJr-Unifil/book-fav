@@ -30,11 +30,18 @@ const fetchBooks = async (query) => {
 };
 
 const renderBooks = (books) => {
-  const searchResultElement =
-    document.getElementById('search-result');
-  searchResultElement.innerHTML = '';
+  const main = document.querySelector('main');
+  main.classList.toggle('book-result');
+  main.classList.toggle('container');
+  main.innerHTML = '';
 
-  console.log(searchResultElement);
+  const h1 = document.createElement('h1');
+  h1.innerText = 'Resultados da sua busca:';
+  const searchResult = document.createElement('div');
+  searchResult.id = 'search-result';
+
+  main.appendChild(h1);
+  main.appendChild(searchResult);
 
   books.forEach((book) => {
     const bookCard = document.createElement('div');
@@ -64,7 +71,7 @@ const renderBooks = (books) => {
       <button class="add-book">adicionar à biblioteca</button>
     `;
 
-    searchResultElement.appendChild(bookCard);
+    searchResult.appendChild(bookCard);
   });
 };
 

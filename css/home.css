@@ -9,7 +9,7 @@ main.container {
   max-width: 540px;
 }
 
-main h1 {
+main.container h1 {
   font-size: var(--really-big-font-size);
   text-align: center;
 
@@ -20,23 +20,23 @@ main h1 {
   -webkit-text-fill-color: transparent;
 }
 
-main p {
+main.container p {
   margin-bottom: var(--normal-font-size);
   color: var(--text-color);
 }
 
-main strong {
+main.container strong {
   color: var(--pink-color);
 }
 
-main ul li {
+main.container ul li {
   list-style: square;
   list-style-position: inside;
 
   color: var(--text-color);
 }
 
-main button {
+main.container button {
   padding: 0.8rem 1.6rem;
   font-size: var(--normal-font-size);
 
@@ -46,7 +46,7 @@ main button {
   border-radius: 1.2rem;
 }
 
-main ul li:last-child {
+main.container ul li:last-child {
   margin-bottom: var(--normal-font-size);
 }
 
@@ -60,7 +60,7 @@ main ul li:last-child {
 }
 
 @media (max-width: 630px) {
-  main span {
+  main.container span {
     display: none;
   }
 

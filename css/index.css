@@ -42,7 +42,8 @@ body {
   padding-top: 4rem;
 }
 
-.container {
+.container,
+.book-result {
   max-width: 1186px;
   margin: 0 auto;
 }
