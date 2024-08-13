@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -19,18 +19,22 @@
     />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/search-result.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="js/toggle-theme.js" defer></script>
+    <script src="js/main.js" defer></script>
   </head>
   <body>
     <header class="container">
       <div id="logo-wrapper">
-        <img
-          src="/assets/bookFav-logo.svg"
-          alt="The BookFav logo. A purple closed book"
-          id="logo-image"
-        />
+        <a href="/index.html">
+          <img
+            src="/assets/bookFav-logo.svg"
+            alt="The BookFav logo. A purple closed book"
+            id="logo-image"
+          />
+        </a>
         <span id="logo-name">BookFav</span>
       </div>
       <nav>
@@ -52,16 +56,159 @@
         </button>
       </div>
     </header>
-    <div class="input-wrapper container mobile">
-      <i class="ph ph-magnifying-glass"></i>
-      <input
-        type="search"
-        name="search-book"
-        id="search-book"
-        placeholder="Pesquise um livro"
-      />
-    </div>
-    <main class="container"></main>
+    <main class="container">
+      <h1>Resultados da sua busca:</h1>
+      <div id="search-result">
+        <div class="book-card">
+          <div class="book-cover">
+            <img
+              src="assets/Harry-Potter.png"
+              alt="Capa do livro Harry Potter"
+            />
+          </div>
+          <div class="book-info">
+            <p>
+              <span class="title">Título: </span>Monstros Fantásticos
+              e Onde Encontrá-los: O Argumento Original
+            </p>
+            <p><span class="title">Autor(a): </span>J.K Rowling</p>
+            <p>
+              <span class="title">Editora: </span>Pottermore
+              Publishing
+            </p>
+            <p><span class="title">Data: </span>02/02/2017</p>
+            <p><span class="title">Nº Páginas: </span>227</p>
+            <p>
+              <span class="title">Categoria: </span>Performing Arts
+            </p>
+          </div>
+          <button class="add-book">adicionar à biblioteca</button>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">
+            <img
+              src="assets/Blue-Lock.png"
+              alt="Capa do livro Blue Lock"
+            />
+          </div>
+          <div class="book-info">
+            <p><span class="title">Título: </span>Blue Lock 1</p>
+            <p><span class="title">Autor(a): </span>Yusuke Nomura</p>
+            <p>
+              <span class="title">Editora: </span>Kodansha America LLC
+            </p>
+            <p><span class="title">Data: </span>16/03/2021</p>
+            <p><span class="title">Nº Páginas: </span>209</p>
+            <p>
+              <span class="title">Categoria: </span>Comics & Graphic
+              Novel
+            </p>
+          </div>
+          <button class="add-book">adicionar à biblioteca</button>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">
+            <img
+              src="assets/Palmeiras.png"
+              alt="Capa do livro Harry Potter"
+            />
+          </div>
+          <div class="book-info">
+            <p>
+              <span class="title">Título: </span>Cabeça Fria Coração
+              Quente
+            </p>
+            <p>
+              <span class="title">Autor(a): </span>Abel Ferreira,
+              Carlos Martinho, João Martins, Tiago Costa, Vitor
+              Castanheira
+            </p>
+            <p><span class="title">Editora: </span>Garoa Livros</p>
+            <p><span class="title">Data: </span>08/03/2022</p>
+            <p><span class="title">Nº Páginas: </span>585</p>
+            <p>
+              <span class="title">Categoria: </span>Biografia e
+              Autobiografia
+            </p>
+          </div>
+          <button class="add-book">adicionar à biblioteca</button>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">
+            <img
+              src="assets/Harry-Potter.png"
+              alt="Capa do livro Harry Potter"
+            />
+          </div>
+          <div class="book-info">
+            <p>
+              <span class="title">Título: </span>Monstros Fantásticos
+              e Onde Encontrá-los: O Argumento Original
+            </p>
+            <p><span class="title">Autor(a): </span>J.K Rowling</p>
+            <p>
+              <span class="title">Editora: </span>Pottermore
+              Publishing
+            </p>
+            <p><span class="title">Data: </span>02/02/2017</p>
+            <p><span class="title">Nº Páginas: </span>227</p>
+            <p>
+              <span class="title">Categoria: </span>Performing Arts
+            </p>
+          </div>
+          <button class="add-book">adicionar à biblioteca</button>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">
+            <img
+              src="assets/Blue-Lock.png"
+              alt="Capa do livro Blue Lock"
+            />
+          </div>
+          <div class="book-info">
+            <p><span class="title">Título: </span>Blue Lock 1</p>
+            <p><span class="title">Autor(a): </span>Yusuke Nomura</p>
+            <p>
+              <span class="title">Editora: </span>Kodansha America LLC
+            </p>
+            <p><span class="title">Data: </span>16/03/2021</p>
+            <p><span class="title">Nº Páginas: </span>209</p>
+            <p>
+              <span class="title">Categoria: </span>Comics & Graphic
+              Novel
+            </p>
+          </div>
+          <button class="add-book">adicionar à biblioteca</button>
+        </div>
+        <div class="book-card">
+          <div class="book-cover">
+            <img
+              src="assets/Palmeiras.png"
+              alt="Capa do livro Harry Potter"
+            />
+          </div>
+          <div class="book-info">
+            <p>
+              <span class="title">Título: </span>Cabeça Fria Coração
+              Quente
+            </p>
+            <p>
+              <span class="title">Autor(a): </span>Abel Ferreira,
+              Carlos Martinho, João Martins, Tiago Costa, Vitor
+              Castanheira
+            </p>
+            <p><span class="title">Editora: </span>Garoa Livros</p>
+            <p><span class="title">Data: </span>08/03/2022</p>
+            <p><span class="title">Nº Páginas: </span>585</p>
+            <p>
+              <span class="title">Categoria: </span>Biografia e
+              Autobiografia
+            </p>
+          </div>
+          <button class="add-book">adicionar à biblioteca</button>
+        </div>
+      </div>
+    </main>
     <footer>
       <p>
         feito com amor,

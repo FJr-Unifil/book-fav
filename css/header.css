@@ -64,9 +64,16 @@ input[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
+/* Como fazer funcionar???? */
+nav input[type='search']::-webkit-search-cancel-button {
+  color: var(--text-color);
+}
+
 nav input {
   border: none;
   background: none;
+
+  color: var(--text-color);
 }
 
 nav input::placeholder {
