@@ -17,10 +17,14 @@ const fetchBooks = async (query) => {
       return {
         title: volumeInfo.title || 'N/A',
         authors: volumeInfo.authors || ['Unknown'],
+        description: volumeInfo.description || 'N/A',
+        categories: volumeInfo.categories || ['Uncategorized'],
+        pageCount: volumeInfo.pageCount || 'N/A',
         publisher: volumeInfo.publisher || 'N/A',
         publishedDate: volumeInfo.publishedDate || 'N/A',
-        pageCount: volumeInfo.pageCount || 'N/A',
-        categories: volumeInfo.categories || ['Uncategorized'],
+        isbn: getISBNs(volumeInfo.industryIdentifiers) || 'N/A',
+        language: volumeInfo.language || 'N/A',
+        price: volumeInfo.saleInfo || 'N/A',
         imageLinks: volumeInfo.imageLinks || {},
       };
     });
@@ -29,6 +33,25 @@ const fetchBooks = async (query) => {
     return [];
   }
 };
+
+function getISBNs(industryIdentifiers) {
+  if (!industryIdentifiers) return null;
+
+  const isbnData = {
+    ISBN_13: 'N/A',
+    ISBN_10: 'N/A',
+  };
+
+  industryIdentifiers.forEach((identifier) => {
+    if (identifier.type === 'ISBN_13') {
+      isbnData.ISBN_13 = identifier.identifier;
+    } else if (identifier.type === 'ISBN_10') {
+      isbnData.ISBN_10 = identifier.identifier;
+    }
+  });
+
+  return isbnData;
+}
 
 const renderBooks = (books) => {
   const main = document.querySelector('main');
