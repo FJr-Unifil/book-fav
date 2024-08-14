@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>BookFav</title>
+    <title>BookList</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="preconnect"
@@ -19,17 +19,17 @@
     />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/home.css" />
-    <link rel="stylesheet" href="css/search-result.css" />
+    <link rel="stylesheet" href="css/booklist.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="js/toggle-theme.js" defer></script>
     <script src="js/main.js" defer></script>
+    <script src="js/library.js" defer></script>
   </head>
   <body>
     <header class="container">
       <div id="logo-wrapper">
-        <a href="/">
+        <a href="/index.html">
           <img
             src="/assets/bookFav-logo.svg"
             alt="The BookFav logo. A purple closed book"
@@ -57,48 +57,15 @@
         </button>
       </div>
     </header>
-    <div class="input-wrapper container mobile">
-      <i class="ph ph-magnifying-glass"></i>
-      <input
-        type="search"
-        name="search-book"
-        id="search-book"
-        placeholder="Pesquise um livro"
-      />
-    </div>
     <main class="container">
-      <div id="left-side">
-        <img
-          src="/assets/bookshelves.svg"
-          alt="A girl getting a book from a bookshelf. Purple, white and black colors"
-          id="bookshelf"
-        />
-      </div>
-      <div id="right-side">
-        <h1>
-          <span>Livros</span><span class="mobile">BookFav</span>
-        </h1>
-        <p>
-          O que seria de nós sem nossos livros? A melhor forma de
-          receber conhecimento, sem dúvidas, é <strong>lendo</strong>!
-          Por isso me envolvi nesse projeto. Além de gostar muito de
-          livros, ele servirá para <strong>treinar</strong> minhas
-          habilidades de <strong>roteamento de páginas</strong> e uso
-          de <strong>APIs</strong>, via
-          <strong>Google Books API</strong>.
-        </p>
-        <p>O que o projeto permitirá o usuário fazer:</p>
-        <ul>
-          <li>Permitir que o usuário adicione livro na sua lista</li>
-          <li>
-            Salvar localmente no navegador do usuário utilizando o
-            localStorage
-          </li>
-          <li>Tratar os erros utilizando Try/Catch</li>
-        </ul>
-        <button class="mobile">
-          Ir para sua BookList <i class="ph ph-arrow-right"></i>
-        </button>
+      <div class="library">
+        <div class="empty-library">
+          <img
+            src="./assets/empty.svg"
+            alt="Representação de uma prancheta vazia"
+          />
+          <h2>Sua biblioteca esta vazia ;-;</h2>
+        </div>
       </div>
     </main>
     <footer>

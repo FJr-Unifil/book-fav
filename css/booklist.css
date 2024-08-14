@@ -1,0 +1,72 @@
+.empty-library {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+}
+
+h1 {
+  margin-bottom: 3.2rem;
+  text-align: center;
+}
+
+.library {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.book-card {
+  padding: 2rem;
+
+  background-color: var(--input-bg-color);
+  border: 1px solid var(--book-card-border-color);
+  border-radius: 1rem;
+}
+
+.image {
+  margin-bottom: 0.8rem;
+  height: 200px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 0.8rem;
+
+  text-transform: uppercase;
+}
+
+.info-btn {
+  background-color: var(--blue-color);
+  color: #0038ff;
+}
+
+.delete-btn {
+  background-color: var(--red-color);
+  color: #b72b2b;
+}
+
+main i {
+  color: inherit;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}

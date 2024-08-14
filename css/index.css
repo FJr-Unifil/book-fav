@@ -4,6 +4,7 @@
   --pink-color: #c570ff;
   --blue-color: #57a7ff;
   --yellow-color: #ffd07d;
+  --red-color: #ffa0a0;
   --gradient-bg: linear-gradient(
     var(--pink-color),
     var(--blue-color)
@@ -36,6 +37,7 @@
 body {
   min-height: 100vh;
   background-color: var(--background-color);
+  color: var(--text-color);
   font-size: var(--normal-font-size);
   font-family: 'Poppins', sans-serif;
 
@@ -69,6 +71,8 @@ input:focus {
 button {
   border: none;
   background: none;
+
+  font-size: var(--normal-font-size);
 }
 
 a,
