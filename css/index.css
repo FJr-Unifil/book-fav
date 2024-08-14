@@ -18,6 +18,7 @@
   --text-color: #3d3d3d;
   --background-color: #d8d5d9;
   --input-bg-color: #bebebe80;
+  --modal-bg-color: #bebebe;
   --book-card-border-color: #fff;
 }
 
@@ -25,6 +26,7 @@
   --text-color: #d8d5d9;
   --background-color: #3d3d3d;
   --input-bg-color: #25252580;
+  --modal-bg-color: #252525;
   --book-card-border-color: #000;
 }
 

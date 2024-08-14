@@ -1,0 +1,75 @@
+.book-info-container {
+  background-color: var(--modal-bg-color);
+  color: var(--text-color);
+
+  padding: 2rem;
+
+  max-width: 675px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 2rem;
+  border: 1px solid #fff;
+}
+
+.book-info-header {
+  text-align: center;
+
+  position: relative;
+
+  margin-bottom: 3.2rem;
+}
+
+.book-info-header h1 {
+  background: var(--gradient-bg);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.book-info-header img,
+.book-info-header button {
+  position: absolute;
+}
+
+.book-info-header img.left {
+  top: -6rem;
+  left: -5rem;
+}
+
+.book-info-header img.right {
+  top: -6rem;
+  right: -5rem;
+  transform: rotate(90deg);
+}
+
+.book-info-header button {
+  display: block;
+  width: max-content;
+  top: -2rem;
+  right: 0;
+}
+
+.book-info-header button i {
+  color: #ff0000;
+  font-size: 2.4rem;
+}
+
+.book-info-content {
+  column-count: 2;
+  column-gap: 2rem;
+  column-rule: 2px solid var(--purple-color);
+}
+
+.book-info-content .label {
+  color: var(--purple-color);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.book-info-content p {
+  max-width: 32ch;
+  margin-bottom: 0.8rem;
+}

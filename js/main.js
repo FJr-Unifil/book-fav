@@ -23,7 +23,7 @@ const fetchBooks = async (query) => {
         publishedDate: volumeInfo.publishedDate || 'N/A',
         isbn: getISBNs(volumeInfo.industryIdentifiers) || 'N/A',
         language: volumeInfo.language || 'N/A',
-        price: volumeInfo.saleInfo || 'N/A',
+        price: volumeInfo.saleInfo.listPrice.amount || 'N/A',
         imageLinks: volumeInfo.imageLinks || {},
       };
     });
