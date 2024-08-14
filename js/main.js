@@ -1,4 +1,3 @@
-// TODO: IMPLEMENTAR O ALT DAS IMAGENS TAMBËM, TEM QUE SER ACESSÍVEL PÔ
 const fetchBooks = async (query) => {
   const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
     query

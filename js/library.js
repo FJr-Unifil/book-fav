@@ -19,7 +19,7 @@ function renderBooksFromLibrary() {
           <div class="image">
             <img
               src=${book.imageLinks.thumbnail}
-              alt="FODASE"
+              alt="Capa do livro ${book.title}"
             />
           </div>
           <div class="buttons">
