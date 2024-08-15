@@ -47,6 +47,8 @@ main.container a {
   width: fit-content;
 
   border-radius: 1.2rem;
+
+  display: none;
 }
 
 main.container ul li:last-child {
@@ -83,7 +85,7 @@ main.container ul li:last-child {
 }
 
 @media (max-width: 425px) {
-  a.mobile {
+  main.container a.mobile {
     display: flex;
     gap: 0.8rem;
   }
