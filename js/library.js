@@ -1,16 +1,19 @@
 function renderBooksFromLibrary() {
   const books = JSON.parse(localStorage.getItem('library'));
   const library = document.querySelector('.library');
-  if (books === null) return;
+  if (books.length === 0) {
+    library.innerHTML = `
+        <div class="empty-library">
+          <img
+            src="./assets/empty.svg"
+            alt="Representação de uma prancheta vazia"
+          />
+          <h2>Que vazio 😮</h2>
+        </div>`;
+    return;
+  }
 
   library.innerHTML = '';
-
-  const main = document.querySelector('main');
-
-  const h1 = document.createElement('h1');
-  h1.textContent = 'Sua biblioteca:';
-
-  main.insertBefore(h1, main.firstChild);
 
   books.forEach((book, index) => {
     const bookCard = document.createElement('div');
@@ -50,7 +53,7 @@ function renderBookInformation(book) {
   bookInfoContainer.innerHTML = `
       <div class="book-info-header">
         <h1>INFORMAÇÕES DO LIVRO</h1>
-        <button class="close-button" onclick="closeModal(event)">
+        <button class="close-button" onclick="closeModal()">
           <i class="ph ph-x-circle"></i>
         </button>
         <img
@@ -99,14 +102,14 @@ function renderBookInformation(book) {
           ${book.language}
         </p>
         <p><span class="label">preço:</span>
-          ${book.saleInfo}
+          ${book.price}
         </p>
       </div>`;
 
   main.appendChild(bookInfoContainer);
 }
 
-const closeModal = (event) => {
+const closeModal = () => {
   const header = document.querySelector('header');
   const main = document.querySelector('main');
   const library = document.querySelector('.library');

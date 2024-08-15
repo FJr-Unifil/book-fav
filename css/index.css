@@ -5,6 +5,7 @@
   --blue-color: #57a7ff;
   --yellow-color: #ffd07d;
   --red-color: #ffa0a0;
+  --green-color: #63ff85;
   --gradient-bg: linear-gradient(
     var(--pink-color),
     var(--blue-color)

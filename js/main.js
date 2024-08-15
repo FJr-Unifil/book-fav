@@ -13,6 +13,7 @@ const fetchBooks = async (query) => {
 
     return data.items.map((book) => {
       const volumeInfo = book.volumeInfo;
+      const saleInfo = book.saleInfo;
       return {
         title: volumeInfo.title || 'N/A',
         authors: volumeInfo.authors || ['Unknown'],
@@ -23,7 +24,7 @@ const fetchBooks = async (query) => {
         publishedDate: volumeInfo.publishedDate || 'N/A',
         isbn: getISBNs(volumeInfo.industryIdentifiers) || 'N/A',
         language: volumeInfo.language || 'N/A',
-        price: volumeInfo.saleInfo.listPrice.amount || 'N/A',
+        price: getPrice(saleInfo) || 'NOT_FOR_SALE',
         imageLinks: volumeInfo.imageLinks || {},
       };
     });
@@ -50,6 +51,13 @@ function getISBNs(industryIdentifiers) {
   });
 
   return isbnData;
+}
+
+function getPrice(saleInfo) {
+  if (saleInfo.saleability === 'FOR_SALE' && saleInfo.listPrice) {
+    return `${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}`;
+  }
+  return 'NOT_FOR_SALE';
 }
 
 const renderBooks = (books) => {
@@ -109,7 +117,6 @@ const handleAddBook = (event) => {
   if (saveBookToLocalStorage(bookToSave)) {
     event.target.disabled = true;
     event.target.textContent = 'Adicionado';
-    console.log(`Livro adicionado: ${JSON.stringify(bookToSave)}`);
   }
 };
 
@@ -130,6 +137,7 @@ const saveBookToLocalStorage = (book) => {
     library.push(book);
     localStorage.setItem('library', JSON.stringify(library));
     console.log('Book added to library');
+    return true;
   } else {
     console.log('Book already in library');
   }

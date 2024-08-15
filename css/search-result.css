@@ -27,6 +27,10 @@
   font-weight: 700;
 }
 
+.book-cover {
+  height: 200px;
+}
+
 .book-info p {
   width: 26ch;
   font-size: 1.2rem;
@@ -48,4 +52,14 @@ button.add-book {
   display: flex;
   justify-content: center;
   gap: 0.8rem;
+}
+
+button.add-book:disabled {
+  background-color: #c0c0c0;
+  color: #3d3d3d;
+}
+
+button.add-book:disabled:hover {
+  transform: none;
+  cursor: unset;
 }
