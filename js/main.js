@@ -1,83 +1,88 @@
-const fetchBooks = async (query) => {
-  const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-    query
-  )}&maxResults=10`;
+// Por que não criar a classe estática API então? Ao invés de objetos assim? -> Object Literal Approach
+const API = {
+  fetchBooks: async (query) => {
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
+      query
+    )}&maxResults=10`;
 
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    if (!data.items) {
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      return data.items ? data.items.map(API.parseBookData) : [];
+    } catch (error) {
+      console.error('Error fetching books:', error);
       return [];
     }
+  },
 
-    return data.items.map((book) => {
-      const volumeInfo = book.volumeInfo;
-      const saleInfo = book.saleInfo;
-      return {
-        title: volumeInfo.title || 'N/A',
-        authors: volumeInfo.authors || ['Unknown'],
-        description: volumeInfo.description || 'N/A',
-        categories: volumeInfo.categories || ['Uncategorized'],
-        pageCount: volumeInfo.pageCount || 'N/A',
-        publisher: volumeInfo.publisher || 'N/A',
-        publishedDate: volumeInfo.publishedDate || 'N/A',
-        isbn: getISBNs(volumeInfo.industryIdentifiers) || 'N/A',
-        language: volumeInfo.language || 'N/A',
-        price: getPrice(saleInfo) || 'NOT_FOR_SALE',
-        imageLinks: volumeInfo.imageLinks || {},
-      };
-    });
-  } catch (error) {
-    console.error('Error fetching books:', error);
-    return [];
-  }
+  parseBookData: (book) => {
+    const { volumeInfo, saleInfo } = book;
+    return {
+      title: volumeInfo.title || 'N/A',
+      authors: volumeInfo.authors || ['Unknown'],
+      description: volumeInfo.description || 'N/A',
+      categories: volumeInfo.categories || ['Uncategorized'],
+      pageCount: volumeInfo.pageCount || 'N/A',
+      publisher: volumeInfo.publisher || 'N/A',
+      publishedDate: volumeInfo.publishedDate || 'N/A',
+      isbn: API.getISBNs(volumeInfo.industryIdentifiers),
+      language: volumeInfo.language || 'N/A',
+      price: API.getPrice(saleInfo),
+      imageLinks: volumeInfo.imageLinks || {},
+    };
+  },
+
+  getISBNs: (industryIdentifiers) => {
+    if (!industryIdentifiers)
+      return { ISBN_13: 'N/A', ISBN_10: 'N/A' };
+
+    return industryIdentifiers.reduce(
+      (acc, identifier) => {
+        if (
+          identifier.type === 'ISBN_13' ||
+          identifier.type === 'ISBN_10'
+        ) {
+          acc[identifier.type] = identifier.identifier;
+        }
+        return acc;
+      },
+      { ISBN_13: 'N/A', ISBN_10: 'N/A' }
+    );
+  },
+
+  getPrice: (saleInfo) => {
+    return saleInfo.saleability === 'FOR_SALE' && saleInfo.listPrice
+      ? `${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}`
+      : 'NOT_FOR_SALE';
+  },
 };
 
-function getISBNs(industryIdentifiers) {
-  if (!industryIdentifiers) return null;
+const DOM = {
+  renderBooks: (books) => {
+    const main = document.querySelector('main');
+    main.classList.add('book-result');
+    main.classList.remove('container');
 
-  const isbnData = {
-    ISBN_13: 'N/A',
-    ISBN_10: 'N/A',
-  };
-
-  industryIdentifiers.forEach((identifier) => {
-    if (identifier.type === 'ISBN_13') {
-      isbnData.ISBN_13 = identifier.identifier;
-    } else if (identifier.type === 'ISBN_10') {
-      isbnData.ISBN_10 = identifier.identifier;
+    if (books.length === 0) {
+      main.innerHTML = `<h1>Não foram encontrados livros :(</h1>`;
+      return;
     }
-  });
 
-  return isbnData;
-}
+    main.innerHTML =
+      '<h1>Resultados da sua busca:</h1><div id="search-result"></div>';
 
-function getPrice(saleInfo) {
-  if (saleInfo.saleability === 'FOR_SALE' && saleInfo.listPrice) {
-    return `${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}`;
-  }
-  return 'NOT_FOR_SALE';
-}
+    const searchResult = document.getElementById('search-result');
+    books.forEach((book, index) => {
+      const bookCard = DOM.createBookCard(book, index);
+      searchResult.appendChild(bookCard);
+    });
 
-const renderBooks = (books) => {
-  const main = document.querySelector('main');
-  main.classList.add('book-result');
-  main.classList.remove('container');
-  main.innerHTML = '';
+    searchResult.addEventListener('click', DOM.handleAddBook);
+  },
 
-  const h1 = document.createElement('h1');
-  h1.innerText = 'Resultados da sua busca:';
-  const searchResult = document.createElement('div');
-  searchResult.id = 'search-result';
-
-  main.appendChild(h1);
-  main.appendChild(searchResult);
-
-  books.forEach((book, index) => {
+  createBookCard: (book, index) => {
     const bookCard = document.createElement('div');
     bookCard.className = 'book-card';
-
     bookCard.innerHTML = `
       <div class="book-cover">
         <img src="${
@@ -99,53 +104,60 @@ const renderBooks = (books) => {
           ', '
         )}</p>
       </div>
-      <button class="add-book" data-index=${index} >adicionar à biblioteca</button>
+      <button class="add-book" data-index=${index}>adicionar à biblioteca</button>
     `;
+    return bookCard;
+  },
 
-    searchResult.appendChild(bookCard);
+  handleAddBook: (event) => {
+    if (!event.target.classList.contains('add-book')) return;
 
-    searchResult.addEventListener('click', handleAddBook);
-  });
+    const bookIndex = parseInt(
+      event.target.getAttribute('data-index')
+    );
+    const bookToSave = window.searchResults[bookIndex];
+
+    if (Library.saveBook(bookToSave)) {
+      event.target.disabled = true;
+      event.target.textContent = 'Adicionado';
+    }
+  },
 };
 
-const handleAddBook = (event) => {
-  if (!event.target.classList.contains('add-book')) return;
+const Library = {
+  saveBook: (book) => {
+    let library = JSON.parse(localStorage.getItem('library')) || [];
 
-  const bookIndex = parseInt(event.target.getAttribute('data-index'));
-  const bookToSave = window.searchResults[bookIndex];
+    const isBookInLibrary = library.some(
+      (libraryBook) => libraryBook.title === book.title
+    );
 
-  if (saveBookToLocalStorage(bookToSave)) {
-    event.target.disabled = true;
-    event.target.textContent = 'Adicionado';
-  }
+    if (!isBookInLibrary) {
+      library.push(book);
+      localStorage.setItem('library', JSON.stringify(library));
+      console.log('Book added to library');
+      return true;
+    } else {
+      console.log('Book already in library');
+      return false;
+    }
+  },
 };
 
-const searchBooks = async (query) => {
-  const books = await fetchBooks(query);
-  window.searchResults = books;
-  renderBooks(books);
+const App = {
+  init: () => {
+    const searchBtn = document.querySelector('#search-book');
+    searchBtn.addEventListener('keydown', App.handleSearch);
+  },
+
+  handleSearch: async (event) => {
+    if (event.key === 'Enter') {
+      const query = event.target.value;
+      const books = await API.fetchBooks(query);
+      window.searchResults = books;
+      DOM.renderBooks(books);
+    }
+  },
 };
 
-const saveBookToLocalStorage = (book) => {
-  let library = JSON.parse(localStorage.getItem('library')) || [];
-
-  const isBookInLibrary = library.some(
-    (libraryBook) => libraryBook.title === book.title
-  );
-
-  if (!isBookInLibrary) {
-    library.push(book);
-    localStorage.setItem('library', JSON.stringify(library));
-    console.log('Book added to library');
-    return true;
-  } else {
-    console.log('Book already in library');
-  }
-};
-
-const searchBtn = document.querySelector('#search-book');
-searchBtn.addEventListener('keydown', () => {
-  if (event.key === 'Enter') {
-    searchBooks(searchBtn.value);
-  }
-});
+App.init();
