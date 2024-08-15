@@ -36,12 +36,15 @@ main.container ul li {
   color: var(--text-color);
 }
 
-main.container button {
+main.container a {
   padding: 0.8rem 1.6rem;
   font-size: var(--normal-font-size);
+  text-decoration: none;
 
   background: var(--gradient-bg);
   color: var(--text-color);
+
+  width: fit-content;
 
   border-radius: 1.2rem;
 }
@@ -64,19 +67,23 @@ main.container ul li:last-child {
     display: none;
   }
 
-  span.mobile {
+  main.container span.mobile {
     display: inline;
   }
 }
 
 @media (max-width: 550px) {
+  main.book-result {
+    padding: 0 1rem;
+  }
+
   #left-side {
     display: none;
   }
 }
 
 @media (max-width: 425px) {
-  button.mobile {
+  a.mobile {
     display: flex;
     gap: 0.8rem;
   }

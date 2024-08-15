@@ -12,6 +12,8 @@
   transform: translate(-50%, -50%);
   z-index: 999;
 
+  max-height: 95vh;
+
   border-radius: 2rem;
   border: 1px solid #fff;
 }
@@ -54,7 +56,7 @@
 }
 
 .book-info-header button i {
-  color: #ff0000;
+  color: var(--purple-color);
   font-size: 2.4rem;
 }
 
@@ -73,4 +75,35 @@
 .book-info-content p {
   max-width: 32ch;
   margin-bottom: 0.8rem;
+}
+
+@media (max-width: 890px) {
+  .book-info-container {
+    top: 51%;
+    overflow-y: auto;
+  }
+
+  .book-info-header img {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .book-info-header button {
+    right: -2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .book-info-header h1 {
+    margin-top: 2.4rem;
+  }
+
+  .book-info-header button {
+    top: -4rem;
+  }
+
+  .book-info-content {
+    column-count: 1;
+  }
 }

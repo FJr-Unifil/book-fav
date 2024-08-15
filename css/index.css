@@ -51,6 +51,8 @@ body {
 .book-result {
   max-width: 1186px;
   margin: 0 auto;
+  padding: 0 4rem;
+  box-sizing: content-box;
 }
 
 i {

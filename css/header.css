@@ -103,6 +103,10 @@ nav input::placeholder {
 }
 
 @media (max-width: 630px) {
+  header.container {
+    padding-top: 2rem;
+  }
+
   nav {
     flex-grow: 1;
     justify-content: space-between;

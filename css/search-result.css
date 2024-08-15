@@ -7,7 +7,10 @@
 #search-result {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
+
+  margin: 0 auto;
 }
 
 .book-card {
@@ -21,6 +24,8 @@
   gap: 1.2rem;
   grid-template-columns: repeat(2, min-content);
   grid-template-rows: repeat(2, min-content);
+
+  max-width: 100%;
 }
 
 .title {
