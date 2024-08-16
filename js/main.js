@@ -147,7 +147,10 @@ const Library = {
 const App = {
   init: () => {
     const searchBtn = document.querySelector('#search-book');
+    const clearBtn = document.querySelector('#clear-btn');
     searchBtn.addEventListener('keydown', App.handleSearch);
+    searchBtn.addEventListener('input', App.handleClearBtnAppearence);
+    clearBtn.addEventListener('click', App.handleClearSearch);
   },
 
   handleSearch: async (event) => {
@@ -157,6 +160,20 @@ const App = {
       window.searchResults = books;
       DOM.renderBooks(books);
     }
+  },
+
+  handleClearBtnAppearence: () => {
+    const clearBtn = document.querySelector('#clear-btn');
+
+    clearBtn.style.visibility = event.target.value
+      ? 'visible'
+      : 'hidden';
+  },
+
+  handleClearSearch: () => {
+    const searchBtn = document.querySelector('#search-book');
+    searchBtn.value = '';
+    App.handleClearBtnAppearence();
   },
 };
 
