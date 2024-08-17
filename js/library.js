@@ -1,7 +1,8 @@
+import { library, main, header, footer } from './elements.js';
+
 const LibraryDom = {
   renderBooksFromLibrary: () => {
     const books = LibraryMethods.getBooks();
-    const library = document.querySelector('.library');
 
     if (books.length === 0) {
       library.innerHTML = LibraryDom.getEmptyLibraryHTML();
@@ -49,7 +50,6 @@ const LibraryDom = {
   },
 
   renderBookInformation: (book) => {
-    const main = document.querySelector('main');
     const bookInfoContainer = document.createElement('div');
     bookInfoContainer.className = 'book-info-container';
 
@@ -99,20 +99,19 @@ const LibraryDom = {
     </div>`,
 
   applyBlurEffect: () => {
-    ['header', '.library', 'footer'].forEach((selector) => {
-      document.querySelector(selector).style.filter = 'blur(4px)';
-    });
+    header.style.filter = 'blur(4px)';
+    library.style.filter = 'blur(4px)';
+    footer.style.filter = 'blur(4px)';
   },
 
   removeBlurEffect: () => {
-    ['header', '.library', 'footer'].forEach((selector) => {
-      document.querySelector(selector).style.filter = '';
-    });
+    header.style.filter = '';
+    library.style.filter = '';
+    footer.style.filter = '';
   },
 
   closeModal: () => {
     LibraryDom.removeBlurEffect();
-    const main = document.querySelector('main');
     const bookInfoContainer = document.querySelector(
       '.book-info-container'
     );
@@ -161,15 +160,12 @@ const LibraryApp = {
   },
 
   addEventListeners: () => {
-    const library = document.querySelector('.library');
     library.addEventListener('click', (event) => {
       EventHandlers.handleInfoClick(event);
       EventHandlers.handleDeleteClick(event);
     });
 
-    document
-      .querySelector('main')
-      .addEventListener('click', EventHandlers.handleCloseModal);
+    main.addEventListener('click', EventHandlers.handleCloseModal);
   },
 };
 

@@ -1,4 +1,5 @@
-// Por que não criar a classe estática API então? Ao invés de objetos assim? -> Object Literal Approach
+import { main, clearBtn, searchBtn } from './elements.js';
+
 const API = {
   fetchBooks: async (query) => {
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
@@ -59,7 +60,6 @@ const API = {
 
 const DOM = {
   renderBooks: (books) => {
-    const main = document.querySelector('main');
     main.classList.add('book-result');
     main.classList.remove('container');
 
@@ -71,7 +71,8 @@ const DOM = {
     main.innerHTML =
       '<h1>Resultados da sua busca:</h1><div id="search-result"></div>';
 
-    const searchResult = document.getElementById('search-result');
+    const searchResult = document.querySelector('#search-result');
+
     books.forEach((book, index) => {
       const bookCard = DOM.createBookCard(book, index);
       searchResult.appendChild(bookCard);
@@ -145,8 +146,6 @@ const Library = {
 
 const App = {
   init: () => {
-    const searchBtn = document.querySelector('#search-book');
-    const clearBtn = document.querySelector('#clear-btn');
     searchBtn.addEventListener('keydown', App.handleSearch);
     searchBtn.addEventListener('input', App.handleClearBtnAppearence);
     clearBtn.addEventListener('click', App.handleClearSearch);
@@ -162,15 +161,12 @@ const App = {
   },
 
   handleClearBtnAppearence: () => {
-    const clearBtn = document.querySelector('#clear-btn');
-
     clearBtn.style.visibility = event.target.value
       ? 'visible'
       : 'hidden';
   },
 
   handleClearSearch: () => {
-    const searchBtn = document.querySelector('#search-book');
     searchBtn.value = '';
     App.handleClearBtnAppearence();
   },
