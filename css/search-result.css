@@ -32,8 +32,9 @@
   font-weight: 700;
 }
 
-.book-cover {
+.book-card img {
   height: 200px;
+  width: 150px;
 }
 
 .book-info p {

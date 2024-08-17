@@ -30,7 +30,10 @@ const LibraryDom = {
     bookCard.innerHTML = `
       <div class="image">
         <img
-          src=${book.imageLinks.thumbnail}
+          src=${
+            book.imageLinks.thumbnail ||
+            './assets/image-not-found.jpg'
+          }
           alt="Capa do livro ${book.title}"
         />
       </div>
@@ -170,5 +173,4 @@ const LibraryApp = {
   },
 };
 
-// Initialize the application
 LibraryApp.init();

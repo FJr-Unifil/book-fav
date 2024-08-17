@@ -86,8 +86,7 @@ const DOM = {
     bookCard.innerHTML = `
       <div class="book-cover">
         <img src="${
-          book.imageLinks.thumbnail ||
-          'https://via.placeholder.com/128x198'
+          book.imageLinks.thumbnail || './assets/image-not-found.jpg'
         }" alt="Capa do livro ${book.title}" />
       </div>
       <div class="book-info">
