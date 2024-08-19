@@ -1,7 +1,7 @@
 const phrases = [
   'Isso é BookFav',
   'Crie lista de livros',
-  'Offline e Fácil',
+  'Local e Fácil',
 ];
 let currentPhraseIndex = 0;
 let currentCharIndex = 0;
