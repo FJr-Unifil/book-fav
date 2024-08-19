@@ -1,0 +1,34 @@
+#typewriter {
+  height: 40px;
+  max-width: fit-content; /* To make the cursor stay close to the text */
+  line-height: 100%; /* make cursor height smaller */
+  padding-right: 0.5rem; /* create a little bit of space bewteen text and cursor */
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.5rem solid var(--blue-color); /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin-left: auto; /* Gives that scrolling effect as the typing happens */
+  margin-right: auto; /* Gives that scrolling effect as the typing happens */
+  animation: typing 3.5s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--blue-color);
+  }
+}
