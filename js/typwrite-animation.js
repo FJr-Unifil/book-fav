@@ -12,32 +12,40 @@ const pauseDuration = 500;
 const typingElement = document.getElementById('typewriter');
 
 function typeText() {
-  if (isTyping) {
-    if (currentCharIndex < phrases[currentPhraseIndex].length) {
-      typingElement.textContent = phrases[currentPhraseIndex].slice(
-        0,
-        currentCharIndex + 1
-      );
-      currentCharIndex++;
-      setTimeout(typeText, typingSpeed);
-    } else {
-      isTyping = false;
-      setTimeout(typeText, pauseDuration);
-    }
+  if (currentCharIndex < phrases[currentPhraseIndex].length) {
+    typingElement.textContent = phrases[currentPhraseIndex].slice(
+      0,
+      currentCharIndex + 1
+    );
+    currentCharIndex++;
+    setTimeout(animation, typingSpeed);
   } else {
-    if (currentCharIndex > 0) {
-      typingElement.textContent = phrases[currentPhraseIndex].slice(
-        0,
-        currentCharIndex - 1
-      );
-      currentCharIndex--;
-      setTimeout(typeText, typingSpeed);
-    } else {
-      isTyping = true;
-      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-      setTimeout(typeText, pauseDuration);
-    }
+    isTyping = false;
+    setTimeout(animation, typingSpeed);
   }
 }
 
-typeText();
+function eraseText() {
+  if (currentCharIndex > 0) {
+    typingElement.textContent = phrases[currentPhraseIndex].slice(
+      0,
+      currentCharIndex - 1
+    );
+    currentCharIndex--;
+    setTimeout(animation, typingSpeed);
+  } else {
+    isTyping = true;
+    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+    setTimeout(animation, typingSpeed);
+  }
+}
+
+function animation() {
+  if (isTyping) {
+    typeText();
+  } else {
+    eraseText();
+  }
+}
+
+animation();
