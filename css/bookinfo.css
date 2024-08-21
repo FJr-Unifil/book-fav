@@ -6,7 +6,7 @@
 
   max-width: 675px;
 
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -44,7 +44,7 @@
 
 .book-info-header img.right {
   top: -6rem;
-  right: -5rem;
+  right: -5.5rem;
   transform: rotate(90deg);
 }
 
