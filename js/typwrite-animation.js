@@ -6,8 +6,8 @@ const phrases = [
 let currentPhraseIndex = 0;
 let currentCharIndex = 0;
 let isTyping = true;
-const typingSpeed = 100;
-const pauseDuration = 500;
+const typingSpeed = 150;
+const pauseDuration = 1000;
 
 const typingElement = document.getElementById('typewriter');
 
@@ -21,7 +21,7 @@ function typeText() {
     setTimeout(animation, typingSpeed);
   } else {
     isTyping = false;
-    setTimeout(animation, typingSpeed);
+    setTimeout(animation, pauseDuration);
   }
 }
 
@@ -36,7 +36,7 @@ function eraseText() {
   } else {
     isTyping = true;
     currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-    setTimeout(animation, typingSpeed);
+    setTimeout(animation, pauseDuration);
   }
 }
 
