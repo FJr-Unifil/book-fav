@@ -45,12 +45,17 @@ body {
   font-family: 'Poppins', sans-serif;
 
   padding-top: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .container,
 .book-result {
+  width: 100%;
   max-width: 1186px;
-  margin: 0 auto;
   padding: 0 4rem;
   box-sizing: content-box;
 }
