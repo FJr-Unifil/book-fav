@@ -177,6 +177,20 @@ const EventHandlers = {
     }
     return;
   },
+
+  handleKeyPress: (event) => {
+    if (event.key === 'Escape') {
+      const bookInfoModal = document.querySelector('.book-info-container');
+      const deleteBookModal = document.querySelector('.delete-book-modal');
+      
+      if (bookInfoModal) {
+        LibraryDom.closeBookInfoModal();
+      } 
+      if (deleteBookModal) {
+        LibraryDom.closeDeleteBookModal();
+      }
+    }
+  }
 };
 
 const LibraryApp = {
@@ -192,6 +206,7 @@ const LibraryApp = {
     });
 
     main.addEventListener('click', EventHandlers.handleCloseModal);
+    document.addEventListener('keydown', EventHandlers.handleKeyPress);
   },
 };
 
