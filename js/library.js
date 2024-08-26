@@ -59,6 +59,21 @@ const LibraryDom = {
     main.appendChild(bookInfoContainer);
   },
 
+  renderDeleteBookModal: (index) => {
+    LibraryDom.applyBlurEffect();
+    const deleteBookModal = document.createElement('div');
+    deleteBookModal.className = 'delete-book-modal';
+    deleteBookModal.innerHTML = `
+      <h2>Tem certeza que deseja excluir este livro?</h2>
+      <div class="buttons">
+        <button class="cancel-btn">Cancelar</button>
+        <button class="confirm-btn" data-index="${index}">Confirmar</button>
+      </div>
+    `;
+    deleteBookModal.addEventListener('click', EventHandlers.handleConfirmDelete);
+    main.appendChild(deleteBookModal);
+  },
+
   getBookInfoHTML: (book) => `
     <div class="book-info-header">
       <h1>INFORMAÇÕES DO LIVRO</h1>
@@ -110,12 +125,20 @@ const LibraryDom = {
     footer.style.filter = '';
   },
 
-  closeModal: () => {
+  closeBookInfoModal: () => {
     LibraryDom.removeBlurEffect();
     const bookInfoContainer = document.querySelector(
       '.book-info-container'
     );
     main.removeChild(bookInfoContainer);
+  },
+
+  closeDeleteBookModal: () => {
+    LibraryDom.removeBlurEffect();
+    const deleteBookModal = document.querySelector(
+      '.delete-book-modal'
+    );
+    main.removeChild(deleteBookModal);
   },
 };
 
@@ -142,14 +165,26 @@ const EventHandlers = {
   handleDeleteClick: (event) => {
     if (!event.target.classList.contains('delete-btn')) return;
     const index = event.target.getAttribute('data-index');
-    LibraryMethods.deleteBook(index);
-    LibraryDom.renderBooksFromLibrary();
+    LibraryDom.renderDeleteBookModal(index);
   },
 
-  handleCloseModal: (event) => {
+  handleCloseBookInfoModal: (event) => {
     if (event.target.closest('.close-button')) {
-      LibraryDom.closeModal();
+      LibraryDom.closeBookInfoModal();
     }
+  },
+
+  handleConfirmDelete: (event) => {
+    if (event.target.closest('.cancel-btn')) {
+      LibraryDom.closeDeleteBookModal();
+    }
+    if (event.target.closest('.confirm-btn')) {
+      const index = event.target.getAttribute('data-index');
+      LibraryMethods.deleteBook(index);
+      LibraryDom.closeDeleteBookModal();
+      LibraryDom.renderBooksFromLibrary();
+    }
+    return;
   },
 };
 

@@ -1,0 +1,24 @@
+.delete-book-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+
+  max-width: 400px;
+}
+
+.delete-book-modal .buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1.6rem;
+}
+
+.delete-book-modal .buttons .cancel-btn {
+  background-color: var(--text-color);
+  color: var(--background-color);
+  border: 1px solid #fff;
+}
+
+.delete-book-modal .buttons .confirm-btn {
+  background-color: var(--green-color);
+  border: 1px solid green;
+}

@@ -1,4 +1,5 @@
-.book-info-container {
+.book-info-container,
+.delete-book-modal {
   background-color: var(--modal-bg-color);
   color: var(--text-color);
 
