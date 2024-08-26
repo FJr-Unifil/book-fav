@@ -82,6 +82,11 @@ const DOM = {
   },
 
   createBookCard: (book, index) => {
+    const library = JSON.parse(localStorage.getItem('library')) || [];
+    const isBookInLibrary = library.some(
+      (libraryBook) => libraryBook.title === book.title
+    );
+
     const bookCard = document.createElement('div');
     bookCard.className = 'book-card';
     bookCard.innerHTML = `
@@ -104,7 +109,9 @@ const DOM = {
           ', '
         )}</p>
       </div>
-      <button class="add-book" data-index=${index}>adicionar à biblioteca</button>
+      <button class="add-book" data-index=${index} ${isBookInLibrary ? 'disabled' : ''}>
+        ${isBookInLibrary ? 'Adicionado' : 'adicionar à biblioteca'}
+      </button>
     `;
     return bookCard;
   },
