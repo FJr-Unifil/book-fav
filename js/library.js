@@ -56,6 +56,7 @@ const LibraryDom = {
     LibraryDom.applyBlurEffect();
 
     bookInfoContainer.innerHTML = LibraryDom.getBookInfoHTML(book);
+    bookInfoContainer.addEventListener('click', EventHandlers.handleCloseBookInfoModal);
     main.appendChild(bookInfoContainer);
   },
 
@@ -80,16 +81,6 @@ const LibraryDom = {
       <button class="close-button">
         <i class="ph ph-x-circle"></i>
       </button>
-      <img
-        src="assets/paper-clip.svg"
-        alt="A paper clip"
-        class="left"
-      />
-      <img
-        src="assets/paper-clip.svg"
-        alt="A paper clip"
-        class="right"
-      />
     </div>
     <div class="book-info-content">
       <p><span class="label">título:</span> ${book.title}</p>
