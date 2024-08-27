@@ -12,7 +12,7 @@ const LibraryDom = {
       }
       return;
     }
-  
+
     let deleteAllBtn = document.querySelector('#delete-all-btn');
     if (!deleteAllBtn) {
       deleteAllBtn = document.createElement('button');
@@ -22,7 +22,7 @@ const LibraryDom = {
         Excluir Todos
       `;
       main.insertBefore(deleteAllBtn, library);
-  }
+    }
 
     library.innerHTML = '';
     books.forEach((book, index) => {
@@ -73,7 +73,10 @@ const LibraryDom = {
     LibraryDom.applyBlurEffect();
 
     bookInfoContainer.innerHTML = LibraryDom.getBookInfoHTML(book);
-    bookInfoContainer.addEventListener('click', EventHandlers.handleCloseBookInfoModal);
+    bookInfoContainer.addEventListener(
+      'click',
+      EventHandlers.handleCloseBookInfoModal
+    );
     main.appendChild(bookInfoContainer);
   },
 
@@ -88,7 +91,10 @@ const LibraryDom = {
         <button class="confirm-btn" data-index="${index}">Confirmar</button>
       </div>
     `;
-    deleteBookModal.addEventListener('click', EventHandlers.handleConfirmDelete);
+    deleteBookModal.addEventListener(
+      'click',
+      EventHandlers.handleConfirmDelete
+    );
     main.appendChild(deleteBookModal);
   },
 
@@ -160,15 +166,20 @@ const LibraryDom = {
         <button class="confirm-btn">Confirmar</button>
       </div>
     `;
-    deleteAllModal.addEventListener('click', EventHandlers.handleConfirmDeleteAll);
+    deleteAllModal.addEventListener(
+      'click',
+      EventHandlers.handleConfirmDeleteAll
+    );
     main.appendChild(deleteAllModal);
   },
 
   closeDeleteAllModal: () => {
     LibraryDom.removeBlurEffect();
-    const deleteAllModal = document.querySelector('.delete-book-modal');
+    const deleteAllModal = document.querySelector(
+      '.delete-book-modal'
+    );
     main.removeChild(deleteAllModal);
-  }
+  },
 };
 
 const LibraryMethods = {
@@ -184,7 +195,7 @@ const LibraryMethods = {
 
   deleteAllBooks: () => {
     localStorage.removeItem('library');
-  }
+  },
 };
 
 const EventHandlers = {
@@ -219,7 +230,7 @@ const EventHandlers = {
     }
     return;
   },
-  
+
   handleDeleteAllClick: (event) => {
     if (!event.target.closest('#delete-all-btn')) return;
     LibraryDom.renderDeleteAllModal();
@@ -238,12 +249,18 @@ const EventHandlers = {
 
   handleKeyPress: (event) => {
     if (event.key === 'Escape') {
-      const bookInfoModal = document.querySelector('.book-info-container');
-      const deleteBookModal = document.querySelector('.delete-book-modal');
-      const deleteAllModal = document.querySelector('.delete-all-modal');
+      const bookInfoModal = document.querySelector(
+        '.book-info-container'
+      );
+      const deleteBookModal = document.querySelector(
+        '.delete-book-modal'
+      );
+      const deleteAllModal = document.querySelector(
+        '.delete-all-modal'
+      );
       if (bookInfoModal) {
         LibraryDom.closeBookInfoModal();
-      } 
+      }
       if (deleteBookModal) {
         LibraryDom.closeDeleteBookModal();
       }
@@ -251,7 +268,7 @@ const EventHandlers = {
         LibraryDom.closeDeleteAllModal();
       }
     }
-  }
+  },
 };
 
 const LibraryApp = {
@@ -268,15 +285,21 @@ const LibraryApp = {
     });
 
     main.addEventListener('click', EventHandlers.handleCloseModal);
-    document.addEventListener('keydown', EventHandlers.handleKeyPress);
+    document.addEventListener(
+      'keydown',
+      EventHandlers.handleKeyPress
+    );
   },
 
   setupDeleteAllButton: () => {
     const deleteAllBtn = document.querySelector('#delete-all-btn');
     if (deleteAllBtn) {
-      deleteAllBtn.addEventListener('click', EventHandlers.handleDeleteAllClick);
+      deleteAllBtn.addEventListener(
+        'click',
+        EventHandlers.handleDeleteAllClick
+      );
     }
-  }
+  },
 };
 
 LibraryApp.init();

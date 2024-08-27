@@ -109,7 +109,9 @@ const DOM = {
           ', '
         )}</p>
       </div>
-      <button class="add-book" data-index=${index} ${isBookInLibrary ? 'disabled' : ''}>
+      <button class="add-book" data-index=${index} ${
+      isBookInLibrary ? 'disabled' : ''
+    }>
         ${isBookInLibrary ? 'Adicionado' : 'adicionar à biblioteca'}
       </button>
     `;
