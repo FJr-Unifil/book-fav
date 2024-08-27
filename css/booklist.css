@@ -16,6 +16,25 @@ h1 {
   text-align: center;
 }
 
+#delete-all-btn {
+  background-color: var(--red-color);
+  color: #b72b2b;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  max-width: fit-content;
+
+  display: block;
+  margin-left: auto;
+}
+
+#delete-all-btn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 .library {
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);

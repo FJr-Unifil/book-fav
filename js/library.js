@@ -6,14 +6,31 @@ const LibraryDom = {
 
     if (books.length === 0) {
       library.innerHTML = LibraryDom.getEmptyLibraryHTML();
+      const deleteAllBtn = document.querySelector('#delete-all-btn');
+      if (deleteAllBtn) {
+        deleteAllBtn.remove();
+      }
       return;
     }
+  
+    let deleteAllBtn = document.querySelector('#delete-all-btn');
+    if (!deleteAllBtn) {
+      deleteAllBtn = document.createElement('button');
+      deleteAllBtn.id = 'delete-all-btn';
+      deleteAllBtn.innerHTML = `
+        <i class="ph ph-warning"></i>
+        Excluir Todos
+      `;
+      main.insertBefore(deleteAllBtn, library);
+  }
 
     library.innerHTML = '';
     books.forEach((book, index) => {
       const bookCard = LibraryDom.createBookCard(book, index);
       library.appendChild(bookCard);
     });
+
+    LibraryApp.setupDeleteAllButton();
   },
 
   getEmptyLibraryHTML: () => `
@@ -131,6 +148,27 @@ const LibraryDom = {
     );
     main.removeChild(deleteBookModal);
   },
+
+  renderDeleteAllModal: () => {
+    LibraryDom.applyBlurEffect();
+    const deleteAllModal = document.createElement('div');
+    deleteAllModal.className = 'delete-book-modal';
+    deleteAllModal.innerHTML = `
+      <h2>Deseja mesmo remover TODOS os livros da sua biblioteca?</h2>
+      <div class="buttons">
+        <button class="cancel-btn">Cancelar</button>
+        <button class="confirm-btn">Confirmar</button>
+      </div>
+    `;
+    deleteAllModal.addEventListener('click', EventHandlers.handleConfirmDeleteAll);
+    main.appendChild(deleteAllModal);
+  },
+
+  closeDeleteAllModal: () => {
+    LibraryDom.removeBlurEffect();
+    const deleteAllModal = document.querySelector('.delete-book-modal');
+    main.removeChild(deleteAllModal);
+  }
 };
 
 const LibraryMethods = {
@@ -143,6 +181,10 @@ const LibraryMethods = {
       localStorage.setItem('library', JSON.stringify(library));
     }
   },
+
+  deleteAllBooks: () => {
+    localStorage.removeItem('library');
+  }
 };
 
 const EventHandlers = {
@@ -177,17 +219,36 @@ const EventHandlers = {
     }
     return;
   },
+  
+  handleDeleteAllClick: (event) => {
+    if (!event.target.closest('#delete-all-btn')) return;
+    LibraryDom.renderDeleteAllModal();
+  },
+
+  handleConfirmDeleteAll: (event) => {
+    if (event.target.closest('.cancel-btn')) {
+      LibraryDom.closeDeleteAllModal();
+    }
+    if (event.target.closest('.confirm-btn')) {
+      LibraryMethods.deleteAllBooks();
+      LibraryDom.closeDeleteAllModal();
+      LibraryDom.renderBooksFromLibrary();
+    }
+  },
 
   handleKeyPress: (event) => {
     if (event.key === 'Escape') {
       const bookInfoModal = document.querySelector('.book-info-container');
       const deleteBookModal = document.querySelector('.delete-book-modal');
-      
+      const deleteAllModal = document.querySelector('.delete-all-modal');
       if (bookInfoModal) {
         LibraryDom.closeBookInfoModal();
       } 
       if (deleteBookModal) {
         LibraryDom.closeDeleteBookModal();
+      }
+      if (deleteAllModal) {
+        LibraryDom.closeDeleteAllModal();
       }
     }
   }
@@ -197,6 +258,7 @@ const LibraryApp = {
   init: () => {
     LibraryDom.renderBooksFromLibrary();
     LibraryApp.addEventListeners();
+    LibraryApp.setupDeleteAllButton();
   },
 
   addEventListeners: () => {
@@ -208,6 +270,13 @@ const LibraryApp = {
     main.addEventListener('click', EventHandlers.handleCloseModal);
     document.addEventListener('keydown', EventHandlers.handleKeyPress);
   },
+
+  setupDeleteAllButton: () => {
+    const deleteAllBtn = document.querySelector('#delete-all-btn');
+    if (deleteAllBtn) {
+      deleteAllBtn.addEventListener('click', EventHandlers.handleDeleteAllClick);
+    }
+  }
 };
 
 LibraryApp.init();
